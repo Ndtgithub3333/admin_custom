@@ -1,385 +1,354 @@
-import React from 'react'
+import React, { useState } from 'react'
 import classNames from 'classnames'
 
 import {
-  CAvatar,
   CButton,
   CButtonGroup,
   CCard,
   CCardBody,
   CCardFooter,
-  CCardHeader,
   CCol,
   CProgress,
   CRow,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import {
-  cibCcAmex,
-  cibCcApplePay,
-  cibCcMastercard,
-  cibCcPaypal,
-  cibCcStripe,
-  cibCcVisa,
-  cibGoogle,
-  cibFacebook,
-  cibLinkedin,
-  cifBr,
-  cifEs,
-  cifFr,
-  cifIn,
-  cifPl,
-  cifUs,
-  cibTwitter,
-  cilCloudDownload,
-  cilPeople,
-  cilUser,
-  cilUserFemale,
-} from '@coreui/icons'
+import { cilCloudDownload } from '@coreui/icons'
 
-import avatar1 from 'src/assets/images/avatars/1.jpg'
-import avatar2 from 'src/assets/images/avatars/2.jpg'
-import avatar3 from 'src/assets/images/avatars/3.jpg'
-import avatar4 from 'src/assets/images/avatars/4.jpg'
-import avatar5 from 'src/assets/images/avatars/5.jpg'
-import avatar6 from 'src/assets/images/avatars/6.jpg'
-
-import WidgetsBrand from '../widgets/WidgetsBrand'
 import WidgetsDropdown from '../widgets/WidgetsDropdown'
 import MainChart from './MainChart'
 
 const Dashboard = () => {
+  const [timeRange, setTimeRange] = useState('Month')
+
+  const handleTimeRangeChange = (range) => {
+    setTimeRange(range)
+  }
+
   const progressExample = [
-    { title: 'Visits', value: '29.703 Users', percent: 40, color: 'success' },
-    { title: 'Unique', value: '24.093 Users', percent: 20, color: 'info' },
-    { title: 'Pageviews', value: '78.706 Views', percent: 60, color: 'warning' },
-    { title: 'New Users', value: '22.123 Users', percent: 80, color: 'danger' },
-    { title: 'Bounce Rate', value: 'Average Rate', percent: 40.15, color: 'primary' },
+    { 
+      title: 'Total Users', 
+      value: '29,703', 
+      percent: 100, 
+      color: 'primary',
+      description: 'Total registered users'
+    },
+    { 
+      title: 'Premium Users', 
+      value: '8,912', 
+      percent: 30, 
+      color: 'warning',
+      description: 'Percentage of total users'
+    },
+    { 
+      title: 'Active Users', 
+      value: '24,093', 
+      percent: 81, 
+      color: 'success',
+      description: 'Active in last 30 days'
+    },
+    { 
+      title: 'New Users', 
+      value: '2,123', 
+      percent: 7, 
+      color: 'info',
+      description: 'Joined this month'
+    }
   ]
 
-  const progressGroupExample1 = [
-    { title: 'Monday', value1: 34, value2: 78 },
-    { title: 'Tuesday', value1: 56, value2: 94 },
-    { title: 'Wednesday', value1: 12, value2: 67 },
-    { title: 'Thursday', value1: 43, value2: 91 },
-    { title: 'Friday', value1: 22, value2: 73 },
-    { title: 'Saturday', value1: 53, value2: 82 },
-    { title: 'Sunday', value1: 9, value2: 69 },
+  const chartData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+    datasets: [
+      {
+        label: 'Total Users',
+        backgroundColor: 'rgba(0,0,255,0.1)',
+        borderColor: 'rgba(0,0,255,0.5)',
+        pointHoverBackgroundColor: '#fff',
+        borderWidth: 2,
+        data: [29703, 28234, 27384, 25473, 23976, 22345, 20234],
+        type: 'line'
+      },
+      {
+        label: 'Premium Users',
+        backgroundColor: 'rgba(255,193,7,0.1)',
+        borderColor: 'rgba(255,193,7,0.5)',
+        pointHoverBackgroundColor: '#fff',
+        borderWidth: 2,
+        data: [8912, 8234, 7645, 7123, 6845, 6234, 5845],
+        type: 'line'
+      },
+      {
+        label: 'New Users',
+        backgroundColor: 'rgba(0,216,255,0.8)',
+        borderColor: 'rgba(0,216,255,0.8)',
+        data: [2123, 1897, 2045, 1678, 1890, 1654, 1789],
+        type: 'bar'
+      },
+      {
+        label: 'Active Users',
+        backgroundColor: 'rgba(40,167,69,0.8)',
+        borderColor: 'rgba(40,167,69,0.8)',
+        data: [24093, 23187, 22654, 21897, 22345, 21234, 20987],
+        type: 'bar'
+      }
+    ]
+  }
+
+  // Progress data for each section
+  const revenueProgress = [
+    { 
+      title: 'Total Revenue', 
+      value: '$245,890', 
+      percent: 100, 
+      color: 'primary',
+      description: 'Total earnings'
+    },
+    { 
+      title: 'New Sales', 
+      value: '$32,450', 
+      percent: 13, 
+      color: 'success',
+      description: 'Last 30 days'
+    },
+    { 
+      title: 'Growth Rate', 
+      value: '+12.5%', 
+      percent: 12.5, 
+      color: 'info',
+      description: 'Monthly increase'
+    },
+    { 
+      title: 'Average Order', 
+      value: '$99.99', 
+      percent: 85, 
+      color: 'warning',
+      description: 'Per transaction'
+    }
   ]
 
-  const progressGroupExample2 = [
-    { title: 'Male', icon: cilUser, value: 53 },
-    { title: 'Female', icon: cilUserFemale, value: 43 },
+  const examProgress = [
+    { 
+      title: 'Total Attempts', 
+      value: '15,234', 
+      percent: 100, 
+      color: 'primary',
+      description: 'All exam attempts'
+    },
+    { 
+      title: 'Average Score', 
+      value: '685', 
+      percent: 69, 
+      color: 'warning',
+      description: 'Out of 990'
+    },
+    { 
+      title: 'Pass Rate', 
+      value: '78%', 
+      percent: 78, 
+      color: 'success',
+      description: 'Score > 650'
+    },
+    { 
+      title: 'New Attempts', 
+      value: '1,890', 
+      percent: 12, 
+      color: 'info',
+      description: 'This month'
+    }
   ]
 
-  const progressGroupExample3 = [
-    { title: 'Organic Search', icon: cibGoogle, percent: 56, value: '191,235' },
-    { title: 'Facebook', icon: cibFacebook, percent: 15, value: '51,223' },
-    { title: 'Twitter', icon: cibTwitter, percent: 11, value: '37,564' },
-    { title: 'LinkedIn', icon: cibLinkedin, percent: 8, value: '27,319' },
+  const blogProgress = [
+    { 
+      title: 'Total Views', 
+      value: '89,234', 
+      percent: 100, 
+      color: 'primary',
+      description: 'All-time views'
+    },
+    { 
+      title: 'Active Posts', 
+      value: '156', 
+      percent: 85, 
+      color: 'warning',
+      description: 'Published posts'
+    },
+    { 
+      title: 'Engagement', 
+      value: '65%', 
+      percent: 65, 
+      color: 'success',
+      description: 'Interaction rate'
+    },
+    { 
+      title: 'New Posts', 
+      value: '23', 
+      percent: 15, 
+      color: 'info',
+      description: 'Added this month'
+    }
   ]
 
-  const tableExample = [
-    {
-      avatar: { src: avatar1, status: 'success' },
-      user: {
-        name: 'Yiorgos Avraamu',
-        new: true,
-        registered: 'Jan 1, 2023',
+  // Chart data for each section
+  const revenueChartData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+    datasets: [
+      {
+        label: 'Total Revenue',
+        backgroundColor: 'rgba(0,123,255,0.1)',
+        borderColor: 'rgba(0,123,255,0.5)',
+        pointHoverBackgroundColor: '#fff',
+        borderWidth: 2,
+        data: [245890, 238450, 229780, 218340, 208900, 198450, 188900],
+        type: 'line'
       },
-      country: { name: 'USA', flag: cifUs },
-      usage: {
-        value: 50,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
-        color: 'success',
+      {
+        label: 'New Sales',
+        backgroundColor: 'rgba(40,167,69,0.8)',
+        borderColor: 'rgba(40,167,69,0.8)',
+        data: [32450, 30890, 29780, 28340, 27890, 26450, 25890],
+        type: 'bar'
       },
-      payment: { name: 'Mastercard', icon: cibCcMastercard },
-      activity: '10 sec ago',
-    },
-    {
-      avatar: { src: avatar2, status: 'danger' },
-      user: {
-        name: 'Avram Tarasios',
-        new: false,
-        registered: 'Jan 1, 2023',
+      {
+        label: 'Average Order',
+        backgroundColor: 'rgba(255,193,7,0.1)',
+        borderColor: 'rgba(255,193,7,0.5)',
+        pointHoverBackgroundColor: '#fff',
+        borderWidth: 2,
+        data: [99.99, 98.50, 97.80, 99.20, 98.90, 99.50, 99.99],
+        type: 'line'
+      }
+    ]
+  }
+
+  const examChartData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+    datasets: [
+      {
+        label: 'Total Attempts',
+        backgroundColor: 'rgba(0,123,255,0.1)',
+        borderColor: 'rgba(0,123,255,0.5)',
+        pointHoverBackgroundColor: '#fff',
+        borderWidth: 2,
+        data: [15234, 14890, 14234, 13890, 13234, 12890, 12234],
+        type: 'line'
       },
-      country: { name: 'Brazil', flag: cifBr },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
-        color: 'info',
+      {
+        label: 'Average Score',
+        backgroundColor: 'rgba(255,193,7,0.1)',
+        borderColor: 'rgba(255,193,7,0.5)',
+        pointHoverBackgroundColor: '#fff',
+        borderWidth: 2,
+        data: [685, 688, 682, 675, 670, 665, 660],
+        type: 'line'
       },
-      payment: { name: 'Visa', icon: cibCcVisa },
-      activity: '5 minutes ago',
-    },
-    {
-      avatar: { src: avatar3, status: 'warning' },
-      user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2023' },
-      country: { name: 'India', flag: cifIn },
-      usage: {
-        value: 74,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
-        color: 'warning',
+      {
+        label: 'New Attempts',
+        backgroundColor: 'rgba(40,167,69,0.8)',
+        borderColor: 'rgba(40,167,69,0.8)',
+        data: [1890, 1780, 1670, 1560, 1450, 1340, 1230],
+        type: 'bar'
+      }
+    ]
+  }
+
+  const blogChartData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+    datasets: [
+      {
+        label: 'Total Views',
+        backgroundColor: 'rgba(0,123,255,0.1)',
+        borderColor: 'rgba(0,123,255,0.5)',
+        pointHoverBackgroundColor: '#fff',
+        borderWidth: 2,
+        data: [89234, 85678, 82123, 78567, 75012, 71456, 67901],
+        type: 'line'
       },
-      payment: { name: 'Stripe', icon: cibCcStripe },
-      activity: '1 hour ago',
-    },
-    {
-      avatar: { src: avatar4, status: 'secondary' },
-      user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2023' },
-      country: { name: 'France', flag: cifFr },
-      usage: {
-        value: 98,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
-        color: 'danger',
+      {
+        label: 'Engagement Rate',
+        backgroundColor: 'rgba(255,193,7,0.1)',
+        borderColor: 'rgba(255,193,7,0.5)',
+        pointHoverBackgroundColor: '#fff',
+        borderWidth: 2,
+        data: [65, 63, 64, 62, 61, 60, 59],
+        type: 'line'
       },
-      payment: { name: 'PayPal', icon: cibCcPaypal },
-      activity: 'Last month',
-    },
-    {
-      avatar: { src: avatar5, status: 'success' },
-      user: {
-        name: 'Agapetus Tadeáš',
-        new: true,
-        registered: 'Jan 1, 2023',
-      },
-      country: { name: 'Spain', flag: cifEs },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
-        color: 'primary',
-      },
-      payment: { name: 'Google Wallet', icon: cibCcApplePay },
-      activity: 'Last week',
-    },
-    {
-      avatar: { src: avatar6, status: 'danger' },
-      user: {
-        name: 'Friderik Dávid',
-        new: true,
-        registered: 'Jan 1, 2023',
-      },
-      country: { name: 'Poland', flag: cifPl },
-      usage: {
-        value: 43,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
-        color: 'success',
-      },
-      payment: { name: 'Amex', icon: cibCcAmex },
-      activity: 'Last week',
-    },
-  ]
+      {
+        label: 'New Posts',
+        backgroundColor: 'rgba(40,167,69,0.8)',
+        borderColor: 'rgba(40,167,69,0.8)',
+        data: [23, 21, 19, 17, 15, 13, 11],
+        type: 'bar'
+      }
+    ]
+  }
+
+  // Render statistics sections
+  const renderStatisticsSection = (title, chartData, progressData) => (
+    <CCard className="mb-4">
+      <CCardBody>
+        <CRow>
+          <CCol sm={5}>
+            <h4 className="card-title mb-0">
+              {title}
+            </h4>
+            <div className="small text-body-secondary">
+              {timeRange === 'Day' && 'Last 24 hours'}
+              {timeRange === 'Month' && 'Last 30 days'}
+              {timeRange === 'Year' && 'Last 12 months'}
+            </div>
+          </CCol>
+          <CCol sm={7} className="d-none d-md-block">
+            <CButton color="primary" className="float-end">
+              <CIcon icon={cilCloudDownload} />
+            </CButton>
+            <CButtonGroup className="float-end me-3">
+              {['Day', 'Month', 'Year'].map((value) => (
+                <CButton
+                  color="outline-secondary"
+                  key={value}
+                  className="mx-0"
+                  active={value === timeRange}
+                  onClick={() => handleTimeRangeChange(value)}
+                >
+                  {value}
+                </CButton>
+              ))}
+            </CButtonGroup>
+          </CCol>
+        </CRow>
+        <MainChart data={chartData} timeRange={timeRange} />
+      </CCardBody>
+      <CCardFooter>
+        <CRow xs={{ cols: 1, gutter: 4 }} sm={{ cols: 2 }} lg={{ cols: 4 }} className="mb-2 text-center">
+          {progressData.map((item, index) => (
+            <CCol key={index}>
+              <div className="text-body-secondary">{item.title}</div>
+              <div className="fw-semibold text-truncate">
+                {item.value} ({item.percent}%)
+              </div>
+              <div className="small text-body-secondary">{item.description}</div>
+              <CProgress thin className="mt-2" color={item.color} value={item.percent} />
+            </CCol>
+          ))}
+        </CRow>
+      </CCardFooter>
+    </CCard>
+  )
 
   return (
     <>
       <WidgetsDropdown className="mb-4" />
-      <CCard className="mb-4">
-        <CCardBody>
-          <CRow>
-            <CCol sm={5}>
-              <h4 id="traffic" className="card-title mb-0">
-                Traffic
-              </h4>
-              <div className="small text-body-secondary">January - July 2023</div>
-            </CCol>
-            <CCol sm={7} className="d-none d-md-block">
-              <CButton color="primary" className="float-end">
-                <CIcon icon={cilCloudDownload} />
-              </CButton>
-              <CButtonGroup className="float-end me-3">
-                {['Day', 'Month', 'Year'].map((value) => (
-                  <CButton
-                    color="outline-secondary"
-                    key={value}
-                    className="mx-0"
-                    active={value === 'Month'}
-                  >
-                    {value}
-                  </CButton>
-                ))}
-              </CButtonGroup>
-            </CCol>
-          </CRow>
-          <MainChart />
-        </CCardBody>
-        <CCardFooter>
-          <CRow
-            xs={{ cols: 1, gutter: 4 }}
-            sm={{ cols: 2 }}
-            lg={{ cols: 4 }}
-            xl={{ cols: 5 }}
-            className="mb-2 text-center"
-          >
-            {progressExample.map((item, index, items) => (
-              <CCol
-                className={classNames({
-                  'd-none d-xl-block': index + 1 === items.length,
-                })}
-                key={index}
-              >
-                <div className="text-body-secondary">{item.title}</div>
-                <div className="fw-semibold text-truncate">
-                  {item.value} ({item.percent}%)
-                </div>
-                <CProgress thin className="mt-2" color={item.color} value={item.percent} />
-              </CCol>
-            ))}
-          </CRow>
-        </CCardFooter>
-      </CCard>
-      <WidgetsBrand className="mb-4" withCharts />
-      <CRow>
-        <CCol xs>
-          <CCard className="mb-4">
-            <CCardHeader>Traffic {' & '} Sales</CCardHeader>
-            <CCardBody>
-              <CRow>
-                <CCol xs={12} md={6} xl={6}>
-                  <CRow>
-                    <CCol xs={6}>
-                      <div className="border-start border-start-4 border-start-info py-1 px-3">
-                        <div className="text-body-secondary text-truncate small">New Clients</div>
-                        <div className="fs-5 fw-semibold">9,123</div>
-                      </div>
-                    </CCol>
-                    <CCol xs={6}>
-                      <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
-                        <div className="text-body-secondary text-truncate small">
-                          Recurring Clients
-                        </div>
-                        <div className="fs-5 fw-semibold">22,643</div>
-                      </div>
-                    </CCol>
-                  </CRow>
-                  <hr className="mt-0" />
-                  {progressGroupExample1.map((item, index) => (
-                    <div className="progress-group mb-4" key={index}>
-                      <div className="progress-group-prepend">
-                        <span className="text-body-secondary small">{item.title}</span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <CProgress thin color="info" value={item.value1} />
-                        <CProgress thin color="danger" value={item.value2} />
-                      </div>
-                    </div>
-                  ))}
-                </CCol>
-                <CCol xs={12} md={6} xl={6}>
-                  <CRow>
-                    <CCol xs={6}>
-                      <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
-                        <div className="text-body-secondary text-truncate small">Pageviews</div>
-                        <div className="fs-5 fw-semibold">78,623</div>
-                      </div>
-                    </CCol>
-                    <CCol xs={6}>
-                      <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
-                        <div className="text-body-secondary text-truncate small">Organic</div>
-                        <div className="fs-5 fw-semibold">49,123</div>
-                      </div>
-                    </CCol>
-                  </CRow>
-
-                  <hr className="mt-0" />
-
-                  {progressGroupExample2.map((item, index) => (
-                    <div className="progress-group mb-4" key={index}>
-                      <div className="progress-group-header">
-                        <CIcon className="me-2" icon={item.icon} size="lg" />
-                        <span>{item.title}</span>
-                        <span className="ms-auto fw-semibold">{item.value}%</span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <CProgress thin color="warning" value={item.value} />
-                      </div>
-                    </div>
-                  ))}
-
-                  <div className="mb-5"></div>
-
-                  {progressGroupExample3.map((item, index) => (
-                    <div className="progress-group" key={index}>
-                      <div className="progress-group-header">
-                        <CIcon className="me-2" icon={item.icon} size="lg" />
-                        <span>{item.title}</span>
-                        <span className="ms-auto fw-semibold">
-                          {item.value}{' '}
-                          <span className="text-body-secondary small">({item.percent}%)</span>
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <CProgress thin color="success" value={item.percent} />
-                      </div>
-                    </div>
-                  ))}
-                </CCol>
-              </CRow>
-
-              <br />
-
-              <CTable align="middle" className="mb-0 border" hover responsive>
-                <CTableHead className="text-nowrap">
-                  <CTableRow>
-                    <CTableHeaderCell className="bg-body-tertiary text-center">
-                      <CIcon icon={cilPeople} />
-                    </CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary">User</CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary text-center">
-                      Country
-                    </CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary">Usage</CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary text-center">
-                      Payment Method
-                    </CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary">Activity</CTableHeaderCell>
-                  </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                  {tableExample.map((item, index) => (
-                    <CTableRow v-for="item in tableItems" key={index}>
-                      <CTableDataCell className="text-center">
-                        <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <div>{item.user.name}</div>
-                        <div className="small text-body-secondary text-nowrap">
-                          <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registered:{' '}
-                          {item.user.registered}
-                        </div>
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <CIcon size="xl" icon={item.country.flag} title={item.country.name} />
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <div className="d-flex justify-content-between text-nowrap">
-                          <div className="fw-semibold">{item.usage.value}%</div>
-                          <div className="ms-3">
-                            <small className="text-body-secondary">{item.usage.period}</small>
-                          </div>
-                        </div>
-                        <CProgress thin color={item.usage.color} value={item.usage.value} />
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <CIcon size="xl" icon={item.payment.icon} />
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <div className="small text-body-secondary text-nowrap">Last login</div>
-                        <div className="fw-semibold text-nowrap">{item.activity}</div>
-                      </CTableDataCell>
-                    </CTableRow>
-                  ))}
-                </CTableBody>
-              </CTable>
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
+      
+      {/* User Statistics (existing) */}
+      {renderStatisticsSection('User Statistics', chartData, progressExample)}
+      
+      {/* Revenue Statistics */}
+      {renderStatisticsSection('Revenue Statistics', revenueChartData, revenueProgress)}
+      
+      {/* Exam Statistics */}
+      {renderStatisticsSection('Exam Statistics', examChartData, examProgress)}
+      
+      {/* Blog Statistics */}
+      {renderStatisticsSection('Blog Statistics', blogChartData, blogProgress)}
     </>
   )
 }
