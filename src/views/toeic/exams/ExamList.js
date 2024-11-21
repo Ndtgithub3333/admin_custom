@@ -66,7 +66,6 @@ const ExamList = () => {
                   <CTableHeaderCell>Title</CTableHeaderCell>
                   <CTableHeaderCell>Difficulty</CTableHeaderCell>
                   <CTableHeaderCell>Số lượt làm</CTableHeaderCell>
-                  <CTableHeaderCell>Điểm trung bình</CTableHeaderCell>
                   <CTableHeaderCell>Status</CTableHeaderCell>
                   <CTableHeaderCell>Posted Time</CTableHeaderCell>
                   <CTableHeaderCell>Actions</CTableHeaderCell>
@@ -78,7 +77,6 @@ const ExamList = () => {
                     <CTableDataCell>{exam.title}</CTableDataCell>
                     <CTableDataCell>{exam.difficulty}</CTableDataCell>
                     <CTableDataCell>{exam.attempts}</CTableDataCell>
-                    <CTableDataCell>{exam.avgScore}</CTableDataCell>
                     <CTableDataCell>
                       <CBadge color={exam.status === 'Published' ? 'success' : 'warning'}>
                         {exam.status}

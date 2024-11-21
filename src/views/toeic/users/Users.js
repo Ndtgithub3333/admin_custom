@@ -40,7 +40,6 @@ const Users = () => {
       lastLogin: '2024-03-20',
       registeredDate: '2023-12-15',
       examsTaken: 15,
-      avgScore: 750,
     },
     {
       id: 2,
@@ -51,7 +50,6 @@ const Users = () => {
       lastLogin: '2024-03-19',
       registeredDate: '2024-01-10',
       examsTaken: 8,
-      avgScore: 680,
     },
     {
       id: 3,
@@ -62,7 +60,6 @@ const Users = () => {
       lastLogin: '2024-03-15',
       registeredDate: '2023-11-20',
       examsTaken: 25,
-      avgScore: 820,
     },
     // Thêm nhiều user mẫu khác...
   ])
@@ -223,7 +220,6 @@ const Users = () => {
                     <CTableHeaderCell>Registration Date</CTableHeaderCell>
                     <CTableHeaderCell>Last Login</CTableHeaderCell>
                     <CTableHeaderCell>Exams Taken</CTableHeaderCell>
-                    <CTableHeaderCell>Avg. Score</CTableHeaderCell>
                     <CTableHeaderCell>Actions</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
@@ -245,7 +241,6 @@ const Users = () => {
                       <CTableDataCell>{user.registeredDate}</CTableDataCell>
                       <CTableDataCell>{user.lastLogin}</CTableDataCell>
                       <CTableDataCell>{user.examsTaken}</CTableDataCell>
-                      <CTableDataCell>{user.avgScore}</CTableDataCell>
                       <CTableDataCell>
                         <CButton
                           color="info"
@@ -258,7 +253,8 @@ const Users = () => {
                         >
                           <CIcon icon={cilUser} />
                         </CButton>
-                        <CButton
+                        {/* Edit User */}
+                        {/* <CButton
                           color="warning"
                           size="sm"
                           className="me-2"
@@ -268,7 +264,7 @@ const Users = () => {
                           }}
                         >
                           <CIcon icon={cilPencil} />
-                        </CButton>
+                        </CButton> */}
                         <CButton
                           color={user.status === 'Active' ? 'danger' : 'success'}
                           size="sm"
@@ -331,7 +327,6 @@ const Users = () => {
               <p><strong>Registration Date:</strong> {selectedUser.registeredDate}</p>
               <p><strong>Last Login:</strong> {selectedUser.lastLogin}</p>
               <p><strong>Exams Taken:</strong> {selectedUser.examsTaken}</p>
-              <p><strong>Average Score:</strong> {selectedUser.avgScore}</p>
             </div>
           )}
         </CModalBody>
@@ -343,7 +338,7 @@ const Users = () => {
       </CModal>
 
       {/* Edit User Modal */}
-      <CModal visible={editModal} onClose={() => setEditModal(false)} size="lg">
+      {/* <CModal visible={editModal} onClose={() => setEditModal(false)} size="lg">
         <CModalHeader>
           <CModalTitle>Edit User</CModalTitle>
         </CModalHeader>
@@ -377,7 +372,7 @@ const Users = () => {
           </CButton>
           <CButton color="primary">Save Changes</CButton>
         </CModalFooter>
-      </CModal>
+      </CModal> */}
     </>
   )
 }

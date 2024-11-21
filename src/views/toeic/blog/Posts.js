@@ -38,7 +38,7 @@ const Posts = () => {
       content: '<h2>Getting Started</h2><p>Here are some tips...</p>',
       views: 1234,
       comments: 23,
-      likes: 156,
+      // likes: 156,
       publishDate: '2024-03-15',
     },
     {
@@ -50,7 +50,7 @@ const Posts = () => {
       content: '<h2>Listening Skills</h2><p>Improve your listening with...</p>',
       views: 0,
       comments: 0,
-      likes: 0,
+      // likes: 0,
       publishDate: '-',
     },
   ])
@@ -147,7 +147,7 @@ const Posts = () => {
                   <CTableHeaderCell>Status</CTableHeaderCell>
                   <CTableHeaderCell>Views</CTableHeaderCell>
                   <CTableHeaderCell>Comments</CTableHeaderCell>
-                  <CTableHeaderCell>Likes</CTableHeaderCell>
+                  {/* <CTableHeaderCell>Likes</CTableHeaderCell> */}
                   <CTableHeaderCell>Publish Date</CTableHeaderCell>
                   <CTableHeaderCell>Actions</CTableHeaderCell>
                 </CTableRow>
@@ -172,7 +172,7 @@ const Posts = () => {
                     </CTableDataCell>
                     <CTableDataCell>{post.views.toLocaleString()}</CTableDataCell>
                     <CTableDataCell>{post.comments}</CTableDataCell>
-                    <CTableDataCell>{post.likes}</CTableDataCell>
+                    {/* <CTableDataCell>{post.likes}</CTableDataCell> */}
                     <CTableDataCell>{post.publishDate}</CTableDataCell>
                     <CTableDataCell>
                       <div className="d-flex gap-2">
@@ -230,10 +230,10 @@ const Posts = () => {
                         <i className="fas fa-calendar-alt me-2"></i>
                         {selectedPost.publishDate}
                       </span>
-                      <span className="blog-likes ms-3">
+                      {/* <span className="blog-likes ms-3">
                         <i className="fas fa-heart me-2"></i>
                         {selectedPost.likes.toLocaleString()} likes
-                      </span>
+                      </span> */}
                     </div>
 
                     <div className="mb-3">

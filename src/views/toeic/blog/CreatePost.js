@@ -32,7 +32,7 @@ const CreatePost = () => {
     author: '',
     publishDate: '',
     status: 'Draft',
-    likes: 0
+    // likes: 0
   })
   const quillRef = useRef(null)
 

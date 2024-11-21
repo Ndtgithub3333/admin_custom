@@ -97,7 +97,7 @@ const Dashboard = () => {
   const revenueProgress = [
     { 
       title: 'Total Revenue', 
-      value: '$245,890', 
+      value: '245.890.000 VNĐ', 
       percent: 100, 
       color: 'primary',
       description: 'Total earnings'
@@ -134,20 +134,6 @@ const Dashboard = () => {
       description: 'All exam attempts'
     },
     { 
-      title: 'Average Score', 
-      value: '685', 
-      percent: 69, 
-      color: 'warning',
-      description: 'Out of 990'
-    },
-    { 
-      title: 'Pass Rate', 
-      value: '78%', 
-      percent: 78, 
-      color: 'success',
-      description: 'Score > 650'
-    },
-    { 
       title: 'New Attempts', 
       value: '1,890', 
       percent: 12, 
@@ -165,18 +151,11 @@ const Dashboard = () => {
       description: 'All-time views'
     },
     { 
-      title: 'Active Posts', 
-      value: '156', 
-      percent: 85, 
-      color: 'warning',
-      description: 'Published posts'
-    },
-    { 
-      title: 'Engagement', 
-      value: '65%', 
-      percent: 65, 
+      title: 'Total Posts', 
+      value: '234', 
+      percent: 100, 
       color: 'success',
-      description: 'Interaction rate'
+      description: 'Total blog posts'
     },
     { 
       title: 'New Posts', 
@@ -232,15 +211,6 @@ const Dashboard = () => {
         type: 'line'
       },
       {
-        label: 'Average Score',
-        backgroundColor: 'rgba(255,193,7,0.1)',
-        borderColor: 'rgba(255,193,7,0.5)',
-        pointHoverBackgroundColor: '#fff',
-        borderWidth: 2,
-        data: [685, 688, 682, 675, 670, 665, 660],
-        type: 'line'
-      },
-      {
         label: 'New Attempts',
         backgroundColor: 'rgba(40,167,69,0.8)',
         borderColor: 'rgba(40,167,69,0.8)',
@@ -263,13 +233,11 @@ const Dashboard = () => {
         type: 'line'
       },
       {
-        label: 'Engagement Rate',
-        backgroundColor: 'rgba(255,193,7,0.1)',
-        borderColor: 'rgba(255,193,7,0.5)',
-        pointHoverBackgroundColor: '#fff',
-        borderWidth: 2,
-        data: [65, 63, 64, 62, 61, 60, 59],
-        type: 'line'
+        label: 'Total Posts',
+        backgroundColor: 'rgba( 255, 99, 132, 0.8)',
+        borderColor: 'rgba( 255, 99, 132, 0.8)',
+        data: [123, 211, 119, 173, 151, 113, 113],
+        type: 'bar'
       },
       {
         label: 'New Posts',
