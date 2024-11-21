@@ -36,7 +36,7 @@ const EditPost = () => {
     author: '',
     publishDate: '',
     status: '',
-    likes: 0
+    // likes: 0
   })
   const quillRef = useRef(null)
 
@@ -51,7 +51,7 @@ const EditPost = () => {
       author: 'John Doe',
       publishDate: '2024-03-15',
       status: 'Published',
-      likes: 156
+      // likes: 156
     }
     setFormData(mockPost)
   }, [id])

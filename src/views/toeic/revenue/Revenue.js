@@ -169,7 +169,7 @@ const Revenue = () => {
             className="mb-3"
             icon={<CIcon icon={cilDollar} height={24} />}
             title="Total Revenue"
-            value="$245,890"
+            value="245.890.000 VNĐ"
             color="primary"
           />
         </CCol>
@@ -356,13 +356,13 @@ const Revenue = () => {
                         >
                           Details
                         </CButton>
-                        <CButton
+                        {/* <CButton
                           color="primary"
                           size="sm"
                           onClick={() => handleViewUserDetails(transaction.user.id)}
                         >
                           <CIcon icon={cilUser} />
-                        </CButton>
+                        </CButton> */}
                       </CTableDataCell>
                     </CTableRow>
                   ))}
