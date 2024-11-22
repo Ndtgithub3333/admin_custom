@@ -40,14 +40,39 @@ const UserDetail = () => {
       lastLogin: '2024-03-20',
       examsTaken: 15,
       examHistory: [
-        { examId: 1, title: 'Toeic 1', totalCorrect: 45, date: '2024-03-01T10:00:00', listeningCorrect: 20, readingCorrect: 25 },
-        { examId: 2, title: 'Toeic 2', totalCorrect: 50, date: '2024-03-05T10:00:00', listeningCorrect: 25, readingCorrect: 25 },
-        { examId: 3, title: 'Toeic 3', totalCorrect: 50, date: '2024-03-15T11:30:00', listeningCorrect: 22, readingCorrect: 28 },
-        { examId: 4, title: 'Toeic 4', totalCorrect: 55, date: '2024-03-20T11:30:00', listeningCorrect: 30, readingCorrect: 25 },
-        { examId: 5, title: 'Toeic 5', totalCorrect: 48, date: '2024-03-25T10:00:00', listeningCorrect: 24, readingCorrect: 24 },
-        { examId: 6, title: 'Toeic 6', totalCorrect: 52, date: '2024-03-30T10:00:00', listeningCorrect: 26, readingCorrect: 26 },
-        { examId: 7, title: 'Toeic 7', totalCorrect: 40, date: '2024-04-01T10:00:00', listeningCorrect: 20, readingCorrect: 20 },
-        { examId: 8, title: 'Toeic 8', totalCorrect: 60, date: '2024-04-05T10:00:00', listeningCorrect: 30, readingCorrect: 30 },
+        { examId: 1, title: 'Toeic 1', attempts: [
+            { totalCorrect: 45, date: '2024-03-01T10:00:00', listeningCorrect: 20, readingCorrect: 25 },
+            { totalCorrect: 40, date: '2024-03-10T10:00:00', listeningCorrect: 18, readingCorrect: 22 }
+          ] 
+        },
+        { examId: 2, title: 'Toeic 2', attempts: [
+            { totalCorrect: 50, date: '2024-03-05T10:00:00', listeningCorrect: 25, readingCorrect: 25 }
+          ] 
+        },
+        { examId: 3, title: 'Toeic 3', attempts: [
+            { totalCorrect: 50, date: '2024-03-15T11:30:00', listeningCorrect: 22, readingCorrect: 28 }
+          ] 
+        },
+        { examId: 4, title: 'Toeic 4', attempts: [
+            { totalCorrect: 55, date: '2024-03-20T11:30:00', listeningCorrect: 30, readingCorrect: 25 }
+          ] 
+        },
+        { examId: 5, title: 'Toeic 5', attempts: [
+            { totalCorrect: 48, date: '2024-03-25T10:00:00', listeningCorrect: 24, readingCorrect: 24 }
+          ] 
+        },
+        { examId: 6, title: 'Toeic 6', attempts: [
+            { totalCorrect: 52, date: '2024-03-30T10:00:00', listeningCorrect: 26, readingCorrect: 26 }
+          ] 
+        },
+        { examId: 7, title: 'Toeic 7', attempts: [
+            { totalCorrect: 40, date: '2024-04-01T10:00:00', listeningCorrect: 20, readingCorrect: 20 }
+          ] 
+        },
+        { examId: 8, title: 'Toeic 8', attempts: [
+            { totalCorrect: 60, date: '2024-04-05T10:00:00', listeningCorrect: 30, readingCorrect: 30 }
+          ] 
+        },
       ],
     }
     setUser(fetchedUser)
@@ -63,18 +88,27 @@ const UserDetail = () => {
       )
     }
 
+    // Flatten attempts for sorting
+    const flattenedExams = filteredExams.flatMap(exam => 
+      exam.attempts.map(attempt => ({
+        examId: exam.examId,
+        title: exam.title,
+        ...attempt
+      }))
+    );
+
     if (scoreOrder) {
-      filteredExams = filteredExams.sort((a, b) =>
+      flattenedExams.sort((a, b) =>
         scoreOrder === 'asc' ? a.totalCorrect - b.totalCorrect : b.totalCorrect - a.totalCorrect
       )
     } else if (dateOrder) {
-      filteredExams = filteredExams.sort((a, b) =>
+      flattenedExams.sort((a, b) =>
         dateOrder === 'asc'
           ? new Date(a.date) - new Date(b.date)
           : new Date(b.date) - new Date(a.date)
       )
     }
-    return filteredExams
+    return flattenedExams
   }
 
   const sortedExamHistory = getFilteredAndSortedExams()
