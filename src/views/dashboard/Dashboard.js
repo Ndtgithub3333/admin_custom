@@ -16,6 +16,8 @@ import { cilCloudDownload } from '@coreui/icons'
 
 import WidgetsDropdown from '../widgets/WidgetsDropdown'
 import MainChart from './MainChart'
+import { formatCurrency } from '../../utils/formatCurrency';
+import { formatNumber } from '../../utils/formatNumber';
 
 const Dashboard = () => {
   const [timeRange, setTimeRange] = useState('Month')
@@ -24,31 +26,33 @@ const Dashboard = () => {
     setTimeRange(range)
   }
 
+
+
   const progressExample = [
     { 
       title: 'Total Users', 
-      value: '29,703', 
+      value: formatNumber(29703), 
       percent: 100, 
       color: 'primary',
       description: 'Total registered users'
     },
     { 
       title: 'Premium Users', 
-      value: '8,912', 
+      value: formatNumber(8912), 
       percent: 30, 
       color: 'warning',
       description: 'Percentage of total users'
     },
     { 
       title: 'Active Users', 
-      value: '24,093', 
+      value: formatNumber(24093), 
       percent: 81, 
       color: 'success',
       description: 'Active in last 30 days'
     },
     { 
       title: 'New Users', 
-      value: '2,123', 
+      value: formatNumber(2123), 
       percent: 7, 
       color: 'info',
       description: 'Joined this month'
@@ -97,14 +101,14 @@ const Dashboard = () => {
   const revenueProgress = [
     { 
       title: 'Total Revenue', 
-      value: '245.890.000 VNĐ', 
+      value: formatCurrency(245890000), 
       percent: 100, 
       color: 'primary',
       description: 'Total earnings'
     },
     { 
       title: 'New Sales', 
-      value: '$32,450', 
+      value: formatCurrency(2589000), 
       percent: 13, 
       color: 'success',
       description: 'Last 30 days'
@@ -118,7 +122,7 @@ const Dashboard = () => {
     },
     { 
       title: 'Average Order', 
-      value: '$99.99', 
+      value: formatCurrency(2589000), 
       percent: 85, 
       color: 'warning',
       description: 'Per transaction'
@@ -128,14 +132,14 @@ const Dashboard = () => {
   const examProgress = [
     { 
       title: 'Total Attempts', 
-      value: '15,234', 
+      value: formatNumber(15234), 
       percent: 100, 
       color: 'primary',
       description: 'All exam attempts'
     },
     { 
       title: 'New Attempts', 
-      value: '1,890', 
+      value: formatNumber(1890), 
       percent: 12, 
       color: 'info',
       description: 'This month'
@@ -145,21 +149,21 @@ const Dashboard = () => {
   const blogProgress = [
     { 
       title: 'Total Views', 
-      value: '89,234', 
+      value: formatNumber(89234), 
       percent: 100, 
       color: 'primary',
       description: 'All-time views'
     },
     { 
       title: 'Total Posts', 
-      value: '234', 
+      value: formatNumber(234), 
       percent: 100, 
       color: 'success',
       description: 'Total blog posts'
     },
     { 
       title: 'New Posts', 
-      value: '23', 
+      value: formatNumber(23), 
       percent: 15, 
       color: 'info',
       description: 'Added this month'

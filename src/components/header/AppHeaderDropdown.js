@@ -41,7 +41,10 @@ const AppHeaderDropdown = () => {
           Settings
         </CDropdownItem>
         <CDropdownDivider />
-        <CDropdownItem href="#">
+        <CDropdownItem onClick={() => {
+          // Simulate sign out and redirect to login
+          window.location.href = '/#/login'; // Redirect to login
+        }}>
           <CIcon icon={cilLockLocked} className="me-2" />
           Sign Out
         </CDropdownItem>

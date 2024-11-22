@@ -28,8 +28,11 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilSearch, cilFilter, cilTrash, cilPencil, cilUser } from '@coreui/icons'
+import { useNavigate } from 'react-router-dom' // Import useNavigate
 
 const Users = () => {
+  const navigate = useNavigate() // Initialize useNavigate
+
   const [users, setUsers] = useState([
     {
       id: 1,
@@ -61,7 +64,126 @@ const Users = () => {
       registeredDate: '2023-11-20',
       examsTaken: 25,
     },
-    // Thêm nhiều user mẫu khác...
+    {
+      id: 4,
+      username: 'emilywhite',
+      email: 'emily.white@example.com',
+      status: 'Active',
+      membershipType: 'Regular',
+      lastLogin: '2024-03-18',
+      registeredDate: '2023-09-12',
+      examsTaken: 12,
+    },
+    {
+      id: 5,
+      username: 'robertjohnson',
+      email: 'robert.johnson@example.com',
+      status: 'Blocked',
+      membershipType: 'Premium',
+      lastLogin: '2024-03-14',
+      registeredDate: '2023-08-25',
+      examsTaken: 30,
+    },
+    {
+      id: 6,
+      username: 'sarawilson',
+      email: 'sara.wilson@example.com',
+      status: 'Active',
+      membershipType: 'Premium',
+      lastLogin: '2024-03-16',
+      registeredDate: '2024-02-01',
+      examsTaken: 18,
+    },
+    {
+      id: 7,
+      username: 'davidmartin',
+      email: 'david.martin@example.com',
+      status: 'Active',
+      membershipType: 'Regular',
+      lastLogin: '2024-03-12',
+      registeredDate: '2023-11-30',
+      examsTaken: 10,
+    },
+    {
+      id: 8,
+      username: 'chrislee',
+      email: 'chris.lee@example.com',
+      status: 'Blocked',
+      membershipType: 'Regular',
+      lastLogin: '2024-03-08',
+      registeredDate: '2024-01-15',
+      examsTaken: 5,
+    },
+    {
+      id: 9,
+      username: 'lisabrown',
+      email: 'lisa.brown@example.com',
+      status: 'Active',
+      membershipType: 'Premium',
+      lastLogin: '2024-03-10',
+      registeredDate: '2023-10-20',
+      examsTaken: 20,
+    },
+    {
+      id: 10,
+      username: 'markdavis',
+      email: 'mark.davis@example.com',
+      status: 'Blocked',
+      membershipType: 'Premium',
+      lastLogin: '2024-03-06',
+      registeredDate: '2023-12-10',
+      examsTaken: 25,
+    },
+    {
+      id: 11,
+      username: 'nancytaylor',
+      email: 'nancy.taylor@example.com',
+      status: 'Active',
+      membershipType: 'Regular',
+      lastLogin: '2024-03-11',
+      registeredDate: '2023-09-18',
+      examsTaken: 7,
+    },
+    {
+      id: 12,
+      username: 'paulanderson',
+      email: 'paul.anderson@example.com',
+      status: 'Active',
+      membershipType: 'Premium',
+      lastLogin: '2024-03-13',
+      registeredDate: '2023-11-05',
+      examsTaken: 15,
+    },
+    {
+      id: 13,
+      username: 'helenmoore',
+      email: 'helen.moore@example.com',
+      status: 'Blocked',
+      membershipType: 'Regular',
+      lastLogin: '2024-03-07',
+      registeredDate: '2024-01-20',
+      examsTaken: 10,
+    },
+    {
+      id: 14,
+      username: 'alicegreen',
+      email: 'alice.green@example.com',
+      status: 'Active',
+      membershipType: 'Regular',
+      lastLogin: '2024-03-21',
+      registeredDate: '2024-01-05',
+      examsTaken: 12,
+    },
+    {
+      id: 15,
+      username: 'bobwhite',
+      email: 'bob.white@example.com',
+      status: 'Blocked',
+      membershipType: 'Premium',
+      lastLogin: '2024-03-22',
+      registeredDate: '2024-02-10',
+      examsTaken: 5,
+    },
   ])
 
   const [filteredUsers, setFilteredUsers] = useState([])
@@ -77,6 +199,25 @@ const Users = () => {
   const [selectedUser, setSelectedUser] = useState(null)
   const [viewModal, setViewModal] = useState(false)
   const [editModal, setEditModal] = useState(false)
+  const [examHistory, setExamHistory] = useState([])
+
+  // Sample data for exam history
+  const fakeExamHistory = [
+    {
+      examId: 1,
+      attempts: [
+        { score: 85, date: '2024-03-01', listeningCorrect: 20, readingCorrect: 25 },
+        { score: 90, date: '2024-03-15', listeningCorrect: 22, readingCorrect: 28 },
+      ],
+    },
+    {
+      examId: 2,
+      attempts: [
+        { score: 75, date: '2024-02-20', listeningCorrect: 18, readingCorrect: 20 },
+        { score: 80, date: '2024-03-10', listeningCorrect: 19, readingCorrect: 23 },
+      ],
+    },
+  ]
 
   // Search and Filter Logic
   useEffect(() => {
@@ -132,11 +273,88 @@ const Users = () => {
   }
 
   const handleFilterChange = (filterType, value) => {
-    setFilters(prev => ({
+    setFilters((prev) => ({
       ...prev,
-      [filterType]: value
+      [filterType]: value,
     }))
   }
+
+  const handleViewUser = (user) => {
+    navigate(`/toeic/users/${user.id}`) // Navigate to UserDetail with user ID
+  }
+
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1)
+  const usersPerPage = 5 // Number of users per page
+
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber)
+  }
+
+  // Add more fake users
+  const additionalUsers = [
+    {
+      id: 14,
+      username: 'alicegreen',
+      email: 'alice.green@example.com',
+      status: 'Active',
+      membershipType: 'Regular',
+      lastLogin: '2024-03-21',
+      registeredDate: '2024-01-05',
+      examsTaken: 12,
+    },
+    {
+      id: 15,
+      username: 'bobwhite',
+      email: 'bob.white@example.com',
+      status: 'Blocked',
+      membershipType: 'Premium',
+      lastLogin: '2024-03-22',
+      registeredDate: '2024-02-10',
+      examsTaken: 5,
+    },
+    {
+      id: 16,
+      username: 'charlieblack',
+      email: 'charlie.black@example.com',
+      status: 'Active',
+      membershipType: 'Regular',
+      lastLogin: '2024-03-23',
+      registeredDate: '2024-01-15',
+      examsTaken: 8,
+    },
+    {
+      id: 17,
+      username: 'davidblue',
+      email: 'david.blue@example.com',
+      status: 'Inactive',
+      membershipType: 'Premium',
+      lastLogin: '2024-03-24',
+      registeredDate: '2024-02-20',
+      examsTaken: 10,
+    },
+    {
+      id: 18,
+      username: 'evewhite',
+      email: 'eve.white@example.com',
+      status: 'Active',
+      membershipType: 'Regular',
+      lastLogin: '2024-03-25',
+      registeredDate: '2024-03-01',
+      examsTaken: 6,
+    },
+    // ... add more users as needed ...
+  ]
+
+  useEffect(() => {
+    setUsers((prev) => [...prev, ...additionalUsers]) // Add additional users to the existing list
+  }, [])
+
+  // Calculate the current users to display
+  const indexOfLastUser = currentPage * usersPerPage
+  const indexOfFirstUser = indexOfLastUser - usersPerPage
+  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser)
 
   return (
     <>
@@ -224,71 +442,77 @@ const Users = () => {
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
-                  {filteredUsers.map((user) => (
-                    <CTableRow key={user.id}>
-                      <CTableDataCell>{user.username}</CTableDataCell>
-                      <CTableDataCell>{user.email}</CTableDataCell>
-                      <CTableDataCell>
-                        <CBadge color={user.status === 'Active' ? 'success' : 'danger'}>
-                          {user.status}
-                        </CBadge>
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <CBadge color={user.membershipType === 'Premium' ? 'warning' : 'info'}>
-                          {user.membershipType}
-                        </CBadge>
-                      </CTableDataCell>
-                      <CTableDataCell>{user.registeredDate}</CTableDataCell>
-                      <CTableDataCell>{user.lastLogin}</CTableDataCell>
-                      <CTableDataCell>{user.examsTaken}</CTableDataCell>
-                      <CTableDataCell>
-                        <CButton
-                          color="info"
-                          size="sm"
-                          className="me-2"
-                          onClick={() => {
-                            setSelectedUser(user)
-                            setViewModal(true)
-                          }}
-                        >
-                          <CIcon icon={cilUser} />
-                        </CButton>
-                        {/* Edit User */}
-                        {/* <CButton
-                          color="warning"
-                          size="sm"
-                          className="me-2"
-                          onClick={() => {
-                            setSelectedUser(user)
-                            setEditModal(true)
-                          }}
-                        >
-                          <CIcon icon={cilPencil} />
-                        </CButton> */}
-                        <CButton
-                          color={user.status === 'Active' ? 'danger' : 'success'}
-                          size="sm"
-                          className="me-2"
-                          onClick={() => handleStatusChange(user)}
-                        >
-                          {user.status === 'Active' ? 'Block' : 'Unblock'}
-                        </CButton>
-                        <CButton
-                          color="danger"
-                          size="sm"
-                          variant="outline"
-                          onClick={() => {
-                            setSelectedUser(user)
-                            setDeleteModal(true)
-                          }}
-                        >
-                          <CIcon icon={cilTrash} />
-                        </CButton>
+                  {filteredUsers.length > 0 ? (
+                    currentUsers.map((user) => (
+                      <CTableRow key={user.id}>
+                        <CTableDataCell>{user.username}</CTableDataCell>
+                        <CTableDataCell>{user.email}</CTableDataCell>
+                        <CTableDataCell>
+                          <CBadge color={user.status === 'Active' ? 'success' : 'danger'}>
+                            {user.status}
+                          </CBadge>
+                        </CTableDataCell>
+                        <CTableDataCell>
+                          <CBadge color={user.membershipType === 'Premium' ? 'warning' : 'info'}>
+                            {user.membershipType}
+                          </CBadge>
+                        </CTableDataCell>
+                        <CTableDataCell>{user.registeredDate}</CTableDataCell>
+                        <CTableDataCell>{user.lastLogin}</CTableDataCell>
+                        <CTableDataCell>{user.examsTaken}</CTableDataCell>
+                        <CTableDataCell>
+                          <CButton
+                            color="info"
+                            size="sm"
+                            className="me-2"
+                            onClick={() => handleViewUser(user)}
+                          >
+                            <CIcon icon={cilUser} />
+                          </CButton>
+                          <CButton
+                            color={user.status === 'Active' ? 'danger' : 'success'}
+                            size="sm"
+                            className="me-2"
+                            onClick={() => handleStatusChange(user)}
+                          >
+                            {user.status === 'Active' ? 'Block' : 'Unblock'}
+                          </CButton>
+                          <CButton
+                            color="danger"
+                            size="sm"
+                            variant="outline"
+                            onClick={() => {
+                              setSelectedUser(user)
+                              setDeleteModal(true)
+                            }}
+                          >
+                            <CIcon icon={cilTrash} />
+                          </CButton>
+                        </CTableDataCell>
+                      </CTableRow>
+                    ))
+                  ) : (
+                    <CTableRow>
+                      <CTableDataCell colSpan="8" className="text-center">
+                        No users available.
                       </CTableDataCell>
                     </CTableRow>
-                  ))}
+                  )}
                 </CTableBody>
               </CTable>
+              {/* Pagination Controls */}
+              <div>
+                {Array.from({ length: Math.ceil(filteredUsers.length / usersPerPage) }, (_, i) => (
+                  <CButton
+                    className="me-1"
+                    key={i}
+                    onClick={() => handlePageChange(i + 1)}
+                    color={currentPage === i + 1 ? 'primary' : 'secondary'} // Highlight current page
+                  >
+                    {i + 1}
+                  </CButton>
+                ))}
+              </div>
             </CCardBody>
           </CCard>
         </CCol>
@@ -300,7 +524,8 @@ const Users = () => {
           <CModalTitle>Confirm Delete</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          Are you sure you want to delete user &quot;{selectedUser?.username}?&quot; This action cannot be undone.
+          Are you sure you want to delete user &quot;{selectedUser?.username}?&quot; This action
+          cannot be undone.
         </CModalBody>
         <CModalFooter>
           <CButton color="secondary" onClick={() => setDeleteModal(false)}>
@@ -320,13 +545,44 @@ const Users = () => {
         <CModalBody>
           {selectedUser && (
             <div>
-              <p><strong>Username:</strong> {selectedUser.username}</p>
-              <p><strong>Email:</strong> {selectedUser.email}</p>
-              <p><strong>Status:</strong> {selectedUser.status}</p>
-              <p><strong>Membership:</strong> {selectedUser.membershipType}</p>
-              <p><strong>Registration Date:</strong> {selectedUser.registeredDate}</p>
-              <p><strong>Last Login:</strong> {selectedUser.lastLogin}</p>
-              <p><strong>Exams Taken:</strong> {selectedUser.examsTaken}</p>
+              <p>
+                <strong>Username:</strong> {selectedUser.username}
+              </p>
+              <p>
+                <strong>Email:</strong> {selectedUser.email}
+              </p>
+              <p>
+                <strong>Status:</strong> {selectedUser.status}
+              </p>
+              <p>
+                <strong>Membership:</strong> {selectedUser.membershipType}
+              </p>
+              <p>
+                <strong>Registration Date:</strong> {selectedUser.registeredDate}
+              </p>
+              <p>
+                <strong>Last Login:</strong> {selectedUser.lastLogin}
+              </p>
+              <p>
+                <strong>Exams Taken:</strong> {selectedUser.examsTaken}
+              </p>
+              <h5>Exam History</h5>
+              {examHistory.map((exam) => (
+                <div key={exam.examId}>
+                  <h6>Exam ID: {exam.examId}</h6>
+                  {exam.attempts.map((attempt, index) => (
+                    <div key={index}>
+                      <p>
+                        Score: {attempt.score} - Date: {attempt.date}
+                      </p>
+                      <p>
+                        Listening Correct: {attempt.listeningCorrect}, Reading Correct:{' '}
+                        {attempt.readingCorrect}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ))}
             </div>
           )}
         </CModalBody>

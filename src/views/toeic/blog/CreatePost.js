@@ -132,6 +132,19 @@ const CreatePost = () => {
     'video',
   ]
 
+  const handleSave = (isDraft) => {
+    const { title, category, content, author, publishDate } = formData;
+    
+    // Kiểm tra các trường bắt buộc
+    if (!title || !category || !content || !author || !publishDate) {
+      alert('Vui lòng điền đầy đủ tất cả các trường.');
+      return;
+    }
+
+    // Nếu tất cả các trường hợp lệ
+    console.log('Dữ liệu:', formData);
+    alert(isDraft ? 'Đã lưu nháp thành công!' : 'Đã xuất bản bài viết thành công!');
+  }
 
   return (
     <CRow>
@@ -249,10 +262,10 @@ const CreatePost = () => {
                       zIndex: 1000,
                     }}
                   >
-                    <CButton color="secondary" variant="outline">
+                    <CButton color="secondary" variant="outline" onClick={() => handleSave(true)}>
                       Save as Draft
                     </CButton>
-                    <CButton color="primary">Publish Post</CButton>
+                    <CButton color="primary" onClick={() => handleSave(false)}>Publish Post</CButton>
                   </div>
                 </CForm>
               </CTabPane>

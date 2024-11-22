@@ -40,6 +40,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { CChart } from '@coreui/react-chartjs'
 
+import { formatCurrency } from '../../../utils/formatCurrency'
 const Revenue = () => {
   const navigate = useNavigate()
   const [transactions, setTransactions] = useState([
@@ -169,7 +170,7 @@ const Revenue = () => {
             className="mb-3"
             icon={<CIcon icon={cilDollar} height={24} />}
             title="Total Revenue"
-            value="245.890.000 VNĐ"
+            value={formatCurrency(245890000)}
             color="primary"
           />
         </CCol>
@@ -329,7 +330,7 @@ const Revenue = () => {
                           {transaction.user.membershipType}
                         </CBadge>
                       </CTableDataCell>
-                      <CTableDataCell>${transaction.amount}</CTableDataCell>
+                      <CTableDataCell>{formatCurrency(transaction.amount)}</CTableDataCell>
                       <CTableDataCell>{transaction.date}</CTableDataCell>
                       <CTableDataCell>
                         <CBadge 
@@ -385,7 +386,7 @@ const Revenue = () => {
               <p><strong>User:</strong> {selectedTransaction.user.name}</p>
               <p><strong>Email:</strong> {selectedTransaction.user.email}</p>
               <p><strong>Membership Type:</strong> {selectedTransaction.user.membershipType}</p>
-              <p><strong>Amount:</strong> ${selectedTransaction.amount}</p>
+              <p><strong>Amount:</strong> {formatCurrency(selectedTransaction.amount)}</p>
               <p><strong>Date & Time:</strong> {selectedTransaction.date}</p>
               <p><strong>Status:</strong> {selectedTransaction.status}</p>
             </div>
