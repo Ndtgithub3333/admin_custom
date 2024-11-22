@@ -42,6 +42,11 @@ const ExamList = () => {
     navigate(`/toeic/exams/edit/${examId}`)
   }
 
+  const handleViewTemplate = () => {
+    const url = 'https://docs.google.com/spreadsheets/d/1gzZJZ90qk1KIadXhqyct_CBksHfk-_hORWm27r9XX2U/edit?usp=sharing'; // sau có thể lấy từ DB, biến,....
+    window.open(url, '_blank'); // Mở liên kết trong tab mới
+  }
+
   return (
     <CRow>
       <CCol xs={12}>
@@ -53,8 +58,8 @@ const ExamList = () => {
                 <CButton color="primary" className="me-2" onClick={() => navigate('/toeic/exams/create')}>
                   Create New Exam
                 </CButton>
-                <CButton color="success" className="me-2" onClick={() => console.log('Download template')}>
-                  Download Template
+                <CButton color="success" className="me-2" onClick={handleViewTemplate}>
+                  View Template
                 </CButton>
               </div>
             </div>
@@ -65,7 +70,7 @@ const ExamList = () => {
                 <CTableRow>
                   <CTableHeaderCell>Title</CTableHeaderCell>
                   <CTableHeaderCell>Difficulty</CTableHeaderCell>
-                  <CTableHeaderCell>Số lượt làm</CTableHeaderCell>
+                  <CTableHeaderCell>Exam Attempts</CTableHeaderCell>
                   <CTableHeaderCell>Status</CTableHeaderCell>
                   <CTableHeaderCell>Posted Time</CTableHeaderCell>
                   <CTableHeaderCell>Actions</CTableHeaderCell>

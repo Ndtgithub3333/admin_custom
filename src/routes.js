@@ -5,6 +5,7 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 
 // TOEIC Admin Components
 const ToeicUsers = React.lazy(() => import('./views/toeic/users/Users'))
+const UserDetail = React.lazy(() => import('./views/toeic/users/UserDetail'))
 
 // Exam Management
 const ToeicExamList = React.lazy(() => import('./views/toeic/exams/ExamList'))
@@ -25,12 +26,16 @@ const FlashCards = React.lazy(() => import('./views/toeic/flashcards/FlashCards'
 // Other
 const ToeicRevenue = React.lazy(() => import('./views/toeic/revenue/Revenue'))
 
+//Login 
+const Login = React.lazy(() => import('./views/pages/login/Login'))
+
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
 
   // User Management
   { path: '/toeic/users', name: 'Users Management', element: ToeicUsers },
+  { path: '/toeic/users/:userId', name: 'User Detail', element: UserDetail },
   
   // Exam Routes
   { path: '/toeic/exams/list', name: 'Exam List', element: ToeicExamList },
@@ -50,6 +55,10 @@ const routes = [
 
   // Analytics
   { path: '/toeic/revenue', name: 'Revenue', element: ToeicRevenue },
+
+  // Login
+  { path: '/login', name: 'Login', element: Login },
+   
 ]
 
 export default routes

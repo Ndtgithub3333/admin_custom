@@ -15,6 +15,8 @@ import { CChartBar, CChartLine } from '@coreui/react-chartjs'
 import CIcon from '@coreui/icons-react'
 import { cilArrowBottom, cilArrowTop, cilOptions } from '@coreui/icons'
 
+import {formatCurrency} from '../../utils/formatCurrency'
+
 const WidgetsDropdown = (props) => {
   const widgetChartRef1 = useRef(null)
   const widgetChartRef2 = useRef(null)
@@ -134,7 +136,7 @@ const WidgetsDropdown = (props) => {
           color="info"
           value={
             <>
-              6.200.000 VNĐ{' '}
+              {formatCurrency(2589000)}{' '}
               <span className="fs-6 fw-normal">
                 (40.9% <CIcon icon={cilArrowTop} />)
               </span>
